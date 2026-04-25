@@ -17,9 +17,7 @@ export default function FarmForm() {
   const [successMessage, setSuccessMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
 
-  function handleChange(
-    event: React.ChangeEvent<HTMLInputElement>
-  ) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value, type, checked } = event.target
 
     setFormData((prev) => ({
@@ -67,10 +65,13 @@ export default function FarmForm() {
     }
   }
 
+  const inputClassName =
+    "w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:focus:border-emerald-400"
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Farm Name
         </label>
         <input
@@ -79,12 +80,13 @@ export default function FarmForm() {
           value={formData.name}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
+          placeholder="Enter farm name"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Location
         </label>
         <input
@@ -93,12 +95,13 @@ export default function FarmForm() {
           value={formData.location}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
+          placeholder="Enter farm location"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Area (hectares)
         </label>
         <input
@@ -108,12 +111,13 @@ export default function FarmForm() {
           value={formData.area_hectares}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
+          placeholder="e.g. 125.50"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Owner Name
         </label>
         <input
@@ -122,28 +126,30 @@ export default function FarmForm() {
           value={formData.owner_name}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
+          placeholder="Enter owner name"
         />
       </div>
 
-      <label className="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+      <label className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-300">
         <input
           type="checkbox"
           name="is_active"
           checked={formData.is_active}
           onChange={handleChange}
+          className="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
         />
-        Active
+        Farm is active
       </label>
 
       {successMessage && (
-        <div className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-700 dark:bg-green-950 dark:text-green-300">
+        <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
           {successMessage}
         </div>
       )}
 
       {errorMessage && (
-        <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+        <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}
         </div>
       )}
@@ -151,7 +157,7 @@ export default function FarmForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-800 disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+        className="rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Creating..." : "Create Farm"}
       </button>

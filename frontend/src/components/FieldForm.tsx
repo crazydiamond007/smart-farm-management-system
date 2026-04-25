@@ -77,10 +77,13 @@ export default function FieldForm({ farms }: FieldFormProps) {
     }
   }
 
+  const inputClassName =
+    "w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:focus:border-emerald-400"
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Farm
         </label>
         <select
@@ -88,7 +91,7 @@ export default function FieldForm({ farms }: FieldFormProps) {
           value={formData.farm}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+          className={inputClassName}
         >
           <option value="">Select a farm</option>
           {farms.map((farm) => (
@@ -100,7 +103,7 @@ export default function FieldForm({ farms }: FieldFormProps) {
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Field Name
         </label>
         <input
@@ -109,12 +112,13 @@ export default function FieldForm({ farms }: FieldFormProps) {
           value={formData.name}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+          className={inputClassName}
+          placeholder="Enter field name"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Size (hectares)
         </label>
         <input
@@ -124,12 +128,13 @@ export default function FieldForm({ farms }: FieldFormProps) {
           value={formData.size_hectares}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+          className={inputClassName}
+          placeholder="e.g. 25.50"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Soil Type
         </label>
         <input
@@ -138,12 +143,13 @@ export default function FieldForm({ farms }: FieldFormProps) {
           value={formData.soil_type}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+          className={inputClassName}
+          placeholder="e.g. Loamy"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Irrigation Type
         </label>
         <input
@@ -151,19 +157,20 @@ export default function FieldForm({ farms }: FieldFormProps) {
           name="irrigation_type"
           value={formData.irrigation_type}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+          className={inputClassName}
+          placeholder="e.g. Drip"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Status
         </label>
         <select
           name="status"
           value={formData.status}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+          className={inputClassName}
         >
           <option value="available">Available</option>
           <option value="in_use">In Use</option>
@@ -172,13 +179,13 @@ export default function FieldForm({ farms }: FieldFormProps) {
       </div>
 
       {successMessage && (
-        <div className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-700 dark:bg-green-950 dark:text-green-300">
+        <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
           {successMessage}
         </div>
       )}
 
       {errorMessage && (
-        <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+        <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}
         </div>
       )}
@@ -186,7 +193,7 @@ export default function FieldForm({ farms }: FieldFormProps) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-800 disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+        className="rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Creating..." : "Create Field"}
       </button>

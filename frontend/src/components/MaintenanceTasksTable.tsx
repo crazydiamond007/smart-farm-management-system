@@ -14,16 +14,28 @@ type Props = {
   sensors: SensorRecord[]
 }
 
-export default function MaintenanceTasksTable({ tasks, farms, sensors }: Props) {
-  const [editingTask, setEditingTask] = useState<MaintenanceTaskRecord | null>(null)
+export default function MaintenanceTasksTable({
+  tasks,
+  farms,
+  sensors,
+}: Props) {
+  const [editingTask, setEditingTask] =
+    useState<MaintenanceTaskRecord | null>(null)
   const [deletingId, setDeletingId] = useState<number | null>(null)
 
   async function handleDelete(id: number) {
     if (!window.confirm("Delete this maintenance task?")) return
+
     try {
       setDeletingId(id)
-      const response = await fetch(`${API_BASE_URL}/maintenance-tasks/${id}/`, { method: "DELETE" })
-      if (!response.ok) throw new Error("Failed to delete maintenance task.")
+      const response = await fetch(`${API_BASE_URL}/maintenance-tasks/${id}/`, {
+        method: "DELETE",
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to delete maintenance task.")
+      }
+
       window.location.reload()
     } catch (error) {
       alert(error instanceof Error ? error.message : "Something went wrong.")
@@ -32,38 +44,107 @@ export default function MaintenanceTasksTable({ tasks, farms, sensors }: Props) 
     }
   }
 
-  if (tasks.length === 0) {
-    return <div className="rounded-xl border border-gray-200 p-6"><p className="text-sm text-gray-600">No maintenance tasks found.</p></div>
+  if (!tasks || tasks.length === 0) {
+    return (
+      <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+        <p className="text-sm text-slate-600 dark:text-slate-400">
+          No maintenance tasks found.
+        </p>
+      </div>
+    )
   }
 
   return (
     <>
-      <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-[#081223]">
         <table className="min-w-full border-collapse">
           <thead>
-            <tr className="bg-gray-50 text-left">
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">Farm</th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">Sensor</th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">Title</th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">Priority</th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">Status</th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">Due Date</th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700">Actions</th>
+            <tr className="bg-slate-50 text-left dark:bg-slate-800/70">
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Farm
+              </th>
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Sensor
+              </th>
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Title
+              </th>
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Priority
+              </th>
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Status
+              </th>
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Due Date
+              </th>
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             {tasks.map((task) => (
-              <tr key={task.id} className="border-t border-gray-100">
-                <td className="px-4 py-3 text-sm text-gray-800">{task.farm_name}</td>
-                <td className="px-4 py-3 text-sm text-gray-800">{task.sensor_code || "-"}</td>
-                <td className="px-4 py-3 text-sm text-gray-800">{task.title}</td>
-                <td className="px-4 py-3 text-sm text-gray-800">{task.priority}</td>
-                <td className="px-4 py-3 text-sm text-gray-800">{task.status}</td>
-                <td className="px-4 py-3 text-sm text-gray-800">{task.due_date || "-"}</td>
-                <td className="px-4 py-3 text-sm">
+              <tr
+                key={task.id}
+                className="border-t border-slate-100 dark:border-slate-800"
+              >
+                <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
+                  {task.farm_name}
+                </td>
+                <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
+                  {task.sensor_code || "-"}
+                </td>
+                <td className="px-5 py-4 text-sm font-medium text-slate-900 dark:text-white">
+                  {task.title}
+                </td>
+                <td className="px-5 py-4 text-sm">
+                  <span
+                    className={`inline-flex rounded-full px-3 py-1 text-xs font-medium ${
+                      task.priority === "critical"
+                        ? "bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400"
+                        : task.priority === "high"
+                        ? "bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400"
+                        : task.priority === "medium"
+                        ? "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400"
+                        : "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300"
+                    }`}
+                  >
+                    {task.priority}
+                  </span>
+                </td>
+                <td className="px-5 py-4 text-sm">
+                  <span
+                    className={`inline-flex rounded-full px-3 py-1 text-xs font-medium ${
+                      task.status === "completed"
+                        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400"
+                        : task.status === "in_progress"
+                        ? "bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400"
+                        : task.status === "cancelled"
+                        ? "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300"
+                        : "bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400"
+                    }`}
+                  >
+                    {task.status}
+                  </span>
+                </td>
+                <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
+                  {task.due_date || "-"}
+                </td>
+                <td className="px-5 py-4 text-sm">
                   <div className="flex gap-2">
-                    <button onClick={() => setEditingTask(task)} className="rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white">Edit</button>
-                    <button onClick={() => handleDelete(task.id)} disabled={deletingId === task.id} className="rounded-lg bg-red-600 px-3 py-2 text-xs font-medium text-white disabled:opacity-60">
+                    <button
+                      onClick={() => setEditingTask(task)}
+                      className="rounded-xl bg-blue-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-blue-500"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => handleDelete(task.id)}
+                      disabled={deletingId === task.id}
+                      className="rounded-xl bg-red-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-red-500 disabled:opacity-60"
+                    >
                       {deletingId === task.id ? "Deleting..." : "Delete"}
                     </button>
                   </div>

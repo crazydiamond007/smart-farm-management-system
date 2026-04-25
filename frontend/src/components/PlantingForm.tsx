@@ -33,6 +33,7 @@ export default function PlantingForm({
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     const { name, value } = event.target
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -88,10 +89,13 @@ export default function PlantingForm({
     }
   }
 
+  const inputClassName =
+    "w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:focus:border-emerald-400"
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Field
         </label>
         <select
@@ -99,7 +103,7 @@ export default function PlantingForm({
           value={formData.field}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         >
           <option value="">Select a field</option>
           {fields.map((field) => (
@@ -111,7 +115,7 @@ export default function PlantingForm({
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Crop Type
         </label>
         <select
@@ -119,7 +123,7 @@ export default function PlantingForm({
           value={formData.crop_type}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         >
           <option value="">Select a crop type</option>
           {cropTypes.map((crop) => (
@@ -131,7 +135,7 @@ export default function PlantingForm({
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Planting Date
         </label>
         <input
@@ -140,12 +144,12 @@ export default function PlantingForm({
           value={formData.planting_date}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Expected Harvest Date
         </label>
         <input
@@ -153,12 +157,12 @@ export default function PlantingForm({
           name="expected_harvest_date"
           value={formData.expected_harvest_date}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Actual Harvest Date
         </label>
         <input
@@ -166,12 +170,12 @@ export default function PlantingForm({
           name="actual_harvest_date"
           value={formData.actual_harvest_date}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Planted Area (hectares)
         </label>
         <input
@@ -181,19 +185,20 @@ export default function PlantingForm({
           value={formData.planted_area_hectares}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
+          placeholder="e.g. 20.00"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Status
         </label>
         <select
           name="status"
           value={formData.status}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         >
           <option value="planned">Planned</option>
           <option value="growing">Growing</option>
@@ -203,13 +208,13 @@ export default function PlantingForm({
       </div>
 
       {successMessage && (
-        <div className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-700 dark:bg-green-950 dark:text-green-300">
+        <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
           {successMessage}
         </div>
       )}
 
       {errorMessage && (
-        <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+        <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}
         </div>
       )}
@@ -217,7 +222,7 @@ export default function PlantingForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-800 disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+        className="rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Creating..." : "Create Planting"}
       </button>

@@ -30,7 +30,9 @@ export default function MaintenanceTaskForm({
   const [errorMessage, setErrorMessage] = useState("")
 
   function handleChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) {
     const { name, value } = event.target
 
@@ -88,16 +90,21 @@ export default function MaintenanceTaskForm({
     }
   }
 
+  const inputClassName =
+    "w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:focus:border-emerald-400"
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">Farm</label>
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          Farm
+        </label>
         <select
           name="farm"
           value={formData.farm}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm"
+          className={inputClassName}
         >
           <option value="">Select a farm</option>
           {farms.map((farm) => (
@@ -109,12 +116,14 @@ export default function MaintenanceTaskForm({
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">Sensor (optional)</label>
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          Sensor (optional)
+        </label>
         <select
           name="sensor"
           value={formData.sensor}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm"
+          className={inputClassName}
         >
           <option value="">No sensor linked</option>
           {sensors.map((sensor) => (
@@ -126,47 +135,57 @@ export default function MaintenanceTaskForm({
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">Title</label>
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          Title
+        </label>
         <input
           type="text"
           name="title"
           value={formData.title}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm"
+          className={inputClassName}
+          placeholder="Enter maintenance title"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">Description</label>
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          Description
+        </label>
         <textarea
           name="description"
           value={formData.description}
           onChange={handleChange}
           rows={4}
           required
-          className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm"
+          className={`${inputClassName} resize-none`}
+          placeholder="Describe the maintenance task"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">Due Date</label>
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          Due Date
+        </label>
         <input
           type="date"
           name="due_date"
           value={formData.due_date}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm"
+          className={inputClassName}
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">Priority</label>
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          Priority
+        </label>
         <select
           name="priority"
           value={formData.priority}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm"
+          className={inputClassName}
         >
           <option value="low">Low</option>
           <option value="medium">Medium</option>
@@ -176,12 +195,14 @@ export default function MaintenanceTaskForm({
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">Status</label>
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          Status
+        </label>
         <select
           name="status"
           value={formData.status}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm"
+          className={inputClassName}
         >
           <option value="pending">Pending</option>
           <option value="in_progress">In Progress</option>
@@ -191,13 +212,13 @@ export default function MaintenanceTaskForm({
       </div>
 
       {successMessage && (
-        <div className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-700">
+        <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
           {successMessage}
         </div>
       )}
 
       {errorMessage && (
-        <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}
         </div>
       )}
@@ -205,7 +226,7 @@ export default function MaintenanceTaskForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white"
+        className="rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Creating..." : "Create Task"}
       </button>

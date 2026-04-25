@@ -72,22 +72,25 @@ export default function EditFieldModal({
     }
   }
 
+  const inputClassName =
+    "w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:focus:border-emerald-400"
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
-      <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl dark:bg-gray-900">
+      <div className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-xl dark:bg-[#081223]">
         <div className="mb-6 flex items-start justify-between">
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
               Edit Field
             </h2>
-            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
               Update the selected field record.
             </p>
           </div>
 
           <button
             onClick={onClose}
-            className="rounded-lg px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+            className="rounded-xl px-3 py-2 text-sm text-slate-500 transition hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
           >
             ✕
           </button>
@@ -95,7 +98,7 @@ export default function EditFieldModal({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
               Farm
             </label>
             <select
@@ -103,7 +106,7 @@ export default function EditFieldModal({
               value={formData.farm}
               onChange={handleChange}
               required
-              className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+              className={inputClassName}
             >
               <option value="">Select a farm</option>
               {farms.map((farm) => (
@@ -115,7 +118,7 @@ export default function EditFieldModal({
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
               Field Name
             </label>
             <input
@@ -124,12 +127,12 @@ export default function EditFieldModal({
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+              className={inputClassName}
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
               Size (hectares)
             </label>
             <input
@@ -139,12 +142,12 @@ export default function EditFieldModal({
               value={formData.size_hectares}
               onChange={handleChange}
               required
-              className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+              className={inputClassName}
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
               Soil Type
             </label>
             <input
@@ -153,12 +156,12 @@ export default function EditFieldModal({
               value={formData.soil_type}
               onChange={handleChange}
               required
-              className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+              className={inputClassName}
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
               Irrigation Type
             </label>
             <input
@@ -166,19 +169,19 @@ export default function EditFieldModal({
               name="irrigation_type"
               value={formData.irrigation_type}
               onChange={handleChange}
-              className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+              className={inputClassName}
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
               Status
             </label>
             <select
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-gray-500"
+              className={inputClassName}
             >
               <option value="available">Available</option>
               <option value="in_use">In Use</option>
@@ -187,7 +190,7 @@ export default function EditFieldModal({
           </div>
 
           {errorMessage && (
-            <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+            <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-400">
               {errorMessage}
             </div>
           )}
@@ -196,7 +199,7 @@ export default function EditFieldModal({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+              className="rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:opacity-60"
             >
               {isSubmitting ? "Saving..." : "Save Changes"}
             </button>
@@ -204,7 +207,7 @@ export default function EditFieldModal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl border border-gray-300 px-5 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+              className="rounded-2xl border border-slate-300 px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
             >
               Cancel
             </button>

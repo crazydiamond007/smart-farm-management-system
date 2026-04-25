@@ -26,14 +26,14 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="inline-flex items-center rounded-2xl border border-gray-200 bg-white p-1 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-        <div className="h-9 w-24 animate-pulse rounded-xl bg-gray-100 dark:bg-gray-800" />
+      <div className="inline-flex items-center rounded-2xl border border-slate-200 bg-white p-1 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="h-10 w-40 animate-pulse rounded-xl bg-slate-100 dark:bg-slate-800" />
       </div>
     )
   }
 
   return (
-    <div className="inline-flex items-center gap-1 rounded-2xl border border-gray-200 bg-white p-1 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+    <div className="inline-flex items-center gap-1 rounded-2xl border border-slate-200 bg-white p-1 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       {options.map((option) => {
         const Icon = option.icon
         const isActive = theme === option.value
@@ -45,8 +45,8 @@ export default function ThemeToggle() {
             onClick={() => setTheme(option.value)}
             className={`inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition ${
               isActive
-                ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
-                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+                ? "bg-emerald-500 text-white shadow-sm"
+                : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
             }`}
             aria-label={`Switch to ${option.label} theme`}
             title={option.label}

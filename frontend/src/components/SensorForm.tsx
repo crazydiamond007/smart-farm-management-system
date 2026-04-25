@@ -77,10 +77,13 @@ export default function SensorForm({ fields }: SensorFormProps) {
     }
   }
 
+  const inputClassName =
+    "w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:focus:border-emerald-400"
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Field
         </label>
         <select
@@ -88,7 +91,7 @@ export default function SensorForm({ fields }: SensorFormProps) {
           value={formData.field}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         >
           <option value="">Select a field</option>
           {fields.map((field) => (
@@ -100,7 +103,7 @@ export default function SensorForm({ fields }: SensorFormProps) {
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Sensor Code
         </label>
         <input
@@ -109,19 +112,20 @@ export default function SensorForm({ fields }: SensorFormProps) {
           value={formData.sensor_code}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
+          placeholder="e.g. TEMP-A1-01"
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Sensor Type
         </label>
         <select
           name="sensor_type"
           value={formData.sensor_type}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         >
           <option value="temperature">Temperature</option>
           <option value="humidity">Humidity</option>
@@ -132,7 +136,7 @@ export default function SensorForm({ fields }: SensorFormProps) {
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Installation Date
         </label>
         <input
@@ -141,19 +145,19 @@ export default function SensorForm({ fields }: SensorFormProps) {
           value={formData.installation_date}
           onChange={handleChange}
           required
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         />
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Status
         </label>
         <select
           name="status"
           value={formData.status}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
         >
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
@@ -162,7 +166,7 @@ export default function SensorForm({ fields }: SensorFormProps) {
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
           Manufacturer
         </label>
         <input
@@ -170,18 +174,19 @@ export default function SensorForm({ fields }: SensorFormProps) {
           name="manufacturer"
           value={formData.manufacturer}
           onChange={handleChange}
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+          className={inputClassName}
+          placeholder="e.g. AgriSense"
         />
       </div>
 
       {successMessage && (
-        <div className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-700 dark:bg-green-950 dark:text-green-300">
+        <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
           {successMessage}
         </div>
       )}
 
       {errorMessage && (
-        <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+        <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}
         </div>
       )}
@@ -189,7 +194,7 @@ export default function SensorForm({ fields }: SensorFormProps) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-xl bg-gray-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-800 disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+        className="rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Creating..." : "Create Sensor"}
       </button>

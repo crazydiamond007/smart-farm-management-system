@@ -44,8 +44,8 @@ export default function PlantingsTable({
 
   if (!plantings || plantings.length === 0) {
     return (
-      <div className="rounded-xl border border-gray-200 p-6 dark:border-gray-800">
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+      <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+        <p className="text-sm text-slate-600 dark:text-slate-400">
           No plantings found.
         </p>
       </div>
@@ -54,32 +54,32 @@ export default function PlantingsTable({
 
   return (
     <>
-      <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
+      <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-[#081223]">
         <table className="min-w-full border-collapse">
           <thead>
-            <tr className="bg-gray-50 text-left dark:bg-gray-800">
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
+            <tr className="bg-slate-50 text-left dark:bg-slate-800/70">
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Farm
               </th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Field
               </th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Crop
               </th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Planting Date
               </th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Expected Harvest
               </th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Area
               </th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Status
               </th>
-              <th className="px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-200">
+              <th className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">
                 Actions
               </th>
             </tr>
@@ -88,41 +88,53 @@ export default function PlantingsTable({
             {plantings.map((planting) => (
               <tr
                 key={planting.id}
-                className="border-t border-gray-100 dark:border-gray-800"
+                className="border-t border-slate-100 dark:border-slate-800"
               >
-                <td className="px-4 py-3 text-sm text-gray-800 dark:text-gray-200">
+                <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
                   {planting.farm_name}
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-800 dark:text-gray-200">
+                <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
                   {planting.field_name}
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-800 dark:text-gray-200">
+                <td className="px-5 py-4 text-sm font-medium text-slate-900 dark:text-white">
                   {planting.crop_type_name}
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-800 dark:text-gray-200">
+                <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
                   {planting.planting_date}
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-800 dark:text-gray-200">
+                <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
                   {planting.expected_harvest_date || "-"}
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-800 dark:text-gray-200">
+                <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">
                   {planting.planted_area_hectares}
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-800 dark:text-gray-200">
-                  {planting.status}
+                <td className="px-5 py-4 text-sm">
+                  <span
+                    className={`inline-flex rounded-full px-3 py-1 text-xs font-medium ${
+                      planting.status === "growing"
+                        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400"
+                        : planting.status === "planned"
+                        ? "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400"
+                        : planting.status === "harvested"
+                        ? "bg-violet-50 text-violet-700 dark:bg-violet-500/10 dark:text-violet-400"
+                        : "bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400"
+                    }`}
+                  >
+                    {planting.status}
+                  </span>
                 </td>
-                <td className="px-4 py-3 text-sm">
+                <td className="px-5 py-4 text-sm">
                   <div className="flex gap-2">
                     <button
                       onClick={() => setEditingPlanting(planting)}
-                      className="rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-500"
+                      className="rounded-xl bg-blue-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-blue-500"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(planting.id)}
                       disabled={deletingId === planting.id}
-                      className="rounded-lg bg-red-600 px-3 py-2 text-xs font-medium text-white disabled:opacity-60"
+                      className="rounded-xl bg-red-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-red-500 disabled:opacity-60"
                     >
                       {deletingId === planting.id ? "Deleting..." : "Delete"}
                     </button>

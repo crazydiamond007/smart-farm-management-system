@@ -13,7 +13,9 @@ export default async function MaintenancePage() {
   const [farmsData, sensorsData, tasksData] = await Promise.all([
     fetchFromApi<PaginatedResponse<Farm>>("/farms/"),
     fetchFromApi<PaginatedSensorResponse<SensorRecord>>("/sensors/"),
-    fetchFromApi<PaginatedMaintenanceResponse<MaintenanceTaskRecord>>("/maintenance-tasks/"),
+    fetchFromApi<PaginatedMaintenanceResponse<MaintenanceTaskRecord>>(
+      "/maintenance-tasks/"
+    ),
   ])
 
   const farms = farmsData.results
@@ -23,12 +25,14 @@ export default async function MaintenancePage() {
   return (
     <AppShell
       title="Maintenance Management"
-      description="Create and view maintenance task records."
+      description="Track and manage maintenance task records."
     >
       <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr]">
-        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold text-gray-900">Add Maintenance Task</h2>
-          <p className="mt-1 text-sm text-gray-600">
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+            Add Maintenance Task
+          </h2>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
             Record operational and technical maintenance work.
           </p>
 
@@ -38,14 +42,20 @@ export default async function MaintenancePage() {
         </section>
 
         <section className="space-y-4">
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-900">All Maintenance Tasks</h2>
-            <p className="mt-1 text-sm text-gray-600">
-              Current maintenance task records from the backend.
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+              All Maintenance Tasks
+            </h2>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+              View and manage maintenance task records from the backend.
             </p>
           </div>
 
-          <MaintenanceTasksTable tasks={tasks} farms={farms} sensors={sensors} />
+          <MaintenanceTasksTable
+            tasks={tasks}
+            farms={farms}
+            sensors={sensors}
+          />
         </section>
       </div>
     </AppShell>

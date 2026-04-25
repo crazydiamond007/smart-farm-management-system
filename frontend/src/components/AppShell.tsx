@@ -14,18 +14,18 @@ export default function AppShell({
   description,
 }: AppShellProps) {
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="flex min-h-screen bg-[#f6f8fb] dark:bg-[#07111f]">
       <Sidebar />
 
       <div className="flex-1">
-        <header className="border-b border-gray-200 bg-white px-6 py-5 dark:border-gray-800 dark:bg-gray-900 sm:px-8">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <header className="border-b border-slate-200 bg-white/80 px-6 py-6 backdrop-blur-sm dark:border-slate-800 dark:bg-[#081223]/90 sm:px-8">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
                 {title}
               </h1>
               {description && (
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                   {description}
                 </p>
               )}

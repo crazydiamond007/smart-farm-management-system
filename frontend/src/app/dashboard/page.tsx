@@ -5,19 +5,43 @@ import { PaginatedResponse, Farm } from "@/types/farm"
 import { FieldRecord, PaginatedFieldResponse } from "@/types/field"
 import { PaginatedSensorResponse, SensorRecord } from "@/types/sensor"
 import { PaginatedPlantingResponse, PlantingRecord } from "@/types/planting"
-import { PaginatedIrrigationResponse, IrrigationEventRecord } from "@/types/irrigation"
-import { MaintenanceTaskRecord, PaginatedMaintenanceResponse } from "@/types/maintenance"
+import {
+  PaginatedIrrigationResponse,
+  IrrigationEventRecord,
+} from "@/types/irrigation"
+import {
+  MaintenanceTaskRecord,
+  PaginatedMaintenanceResponse,
+} from "@/types/maintenance"
+import {
+  Cpu,
+  Droplets,
+  Map,
+  Sprout,
+  Wrench,
+  Wheat,
+} from "lucide-react"
 
 export default async function DashboardPage() {
-  const [farmsData, fieldsData, sensorsData, plantingsData, irrigationData, tasksData] =
-    await Promise.all([
-      fetchFromApi<PaginatedResponse<Farm>>("/farms/"),
-      fetchFromApi<PaginatedFieldResponse<FieldRecord>>("/fields/"),
-      fetchFromApi<PaginatedSensorResponse<SensorRecord>>("/sensors/"),
-      fetchFromApi<PaginatedPlantingResponse<PlantingRecord>>("/plantings/"),
-      fetchFromApi<PaginatedIrrigationResponse<IrrigationEventRecord>>("/irrigation-events/"),
-      fetchFromApi<PaginatedMaintenanceResponse<MaintenanceTaskRecord>>("/maintenance-tasks/"),
-    ])
+  const [
+    farmsData,
+    fieldsData,
+    sensorsData,
+    plantingsData,
+    irrigationData,
+    tasksData,
+  ] = await Promise.all([
+    fetchFromApi<PaginatedResponse<Farm>>("/farms/"),
+    fetchFromApi<PaginatedFieldResponse<FieldRecord>>("/fields/"),
+    fetchFromApi<PaginatedSensorResponse<SensorRecord>>("/sensors/"),
+    fetchFromApi<PaginatedPlantingResponse<PlantingRecord>>("/plantings/"),
+    fetchFromApi<PaginatedIrrigationResponse<IrrigationEventRecord>>(
+      "/irrigation-events/"
+    ),
+    fetchFromApi<PaginatedMaintenanceResponse<MaintenanceTaskRecord>>(
+      "/maintenance-tasks/"
+    ),
+  ])
 
   const farms = farmsData.results
   const fields = fieldsData.results
@@ -27,73 +51,297 @@ export default async function DashboardPage() {
   const tasks = tasksData.results
 
   const activeSensors = sensors.filter((sensor) => sensor.status === "active").length
-  const growingPlantings = plantings.filter((planting) => planting.status === "growing").length
-  const pendingTasks = tasks.filter((task) => task.status === "pending" || task.status === "in_progress").length
+  const growingPlantings = plantings.filter(
+    (planting) => planting.status === "growing"
+  ).length
+  const pendingTasks = tasks.filter(
+    (task) => task.status === "pending" || task.status === "in_progress"
+  ).length
 
   return (
-    <AppShell title="Dashboard" description="Overview of your smart farming system.">
+    <AppShell
+      title="Welcome back, Admin 👋"
+      description="Here’s what’s happening on your farms today."
+    >
       <div className="space-y-8">
-        <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-6">
-          <StatCard label="Farms" value={farms.length} />
-          <StatCard label="Fields" value={fields.length} />
-          <StatCard label="Sensors" value={sensors.length} />
-          <StatCard label="Active Sensors" value={activeSensors} />
-          <StatCard label="Growing Plantings" value={growingPlantings} />
-          <StatCard label="Pending Tasks" value={pendingTasks} />
+        <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <StatCard
+            label="Total Farms"
+            value={farms.length}
+            icon={Sprout}
+            change="+2 this month"
+            changeColor="green"
+          />
+          <StatCard
+            label="Total Fields"
+            value={fields.length}
+            icon={Map}
+            change="+5 this month"
+            changeColor="green"
+          />
+          <StatCard
+            label="Active Sensors"
+            value={activeSensors}
+            icon={Cpu}
+            change="+3 this month"
+            changeColor="green"
+          />
+          <StatCard
+            label="Maintenance Tasks"
+            value={pendingTasks}
+            icon={Wrench}
+            change="2 overdue"
+            changeColor="red"
+          />
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Recent Irrigation Events
-            </h2>
-            <div className="mt-4 space-y-3">
-              {irrigationEvents.length === 0 ? (
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  No irrigation events yet.
-                </p>
-              ) : (
-                irrigationEvents.slice(0, 5).map((event) => (
-                  <div
-                    key={event.id}
-                    className="rounded-xl border border-gray-100 px-4 py-3 dark:border-gray-800"
-                  >
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      {event.farm_name} — {event.field_name}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {event.method} • {event.water_volume_litres} L • {event.duration_minutes} min
-                    </p>
-                  </div>
-                ))
-              )}
+        <section className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+                Sensor Overview
+              </h2>
+              <div className="rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+                7 Days
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="flex flex-wrap gap-4 text-sm">
+                <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                  <span className="h-2.5 w-6 rounded-full bg-emerald-500" />
+                  Soil Moisture (%)
+                </div>
+                <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                  <span className="h-2.5 w-6 rounded-full bg-blue-500" />
+                  Temperature (°C)
+                </div>
+                <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                  <span className="h-2.5 w-6 rounded-full bg-violet-500" />
+                  Humidity (%)
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
+                <div className="grid grid-cols-7 items-end gap-3">
+                  {[72, 70, 63, 76, 65, 75, 69].map((value, index) => (
+                    <div key={index} className="flex flex-col items-center gap-2">
+                      <div className="flex h-40 items-end gap-1">
+                        <div
+                          className="w-2 rounded-full bg-emerald-500"
+                          style={{ height: `${value}%` }}
+                        />
+                        <div
+                          className="w-2 rounded-full bg-blue-500"
+                          style={{ height: `${Math.max(20, value - 40)}%` }}
+                        />
+                        <div
+                          className="w-2 rounded-full bg-violet-500"
+                          style={{ height: `${Math.max(35, value - 20)}%` }}
+                        />
+                      </div>
+                      <span className="text-xs text-slate-500 dark:text-slate-400">
+                        Day {index + 1}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Recent Maintenance Tasks
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+              Irrigation Overview
             </h2>
-            <div className="mt-4 space-y-3">
-              {tasks.length === 0 ? (
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  No maintenance tasks yet.
-                </p>
-              ) : (
-                tasks.slice(0, 5).map((task) => (
-                  <div
-                    key={task.id}
-                    className="rounded-xl border border-gray-100 px-4 py-3 dark:border-gray-800"
-                  >
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      {task.title}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {task.farm_name} • {task.priority} • {task.status}
+
+            <div className="mt-8 flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="relative flex h-52 w-52 items-center justify-center rounded-full bg-[conic-gradient(#22c55e_0%_72%,#3b82f6_72%_94%,#f59e0b_94%_100%)]">
+                <div className="flex h-36 w-36 flex-col items-center justify-center rounded-full bg-white dark:bg-[#081223]">
+                  <span className="text-4xl font-bold text-slate-900 dark:text-white">
+                    72%
+                  </span>
+                  <span className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    Efficient
+                  </span>
+                </div>
+              </div>
+
+              <div className="w-full max-w-xs space-y-5">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1 h-3 w-3 rounded-full bg-emerald-500" />
+                    <div>
+                      <p className="font-medium text-slate-900 dark:text-white">
+                        Efficient
+                      </p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        13 fields
+                      </p>
+                    </div>
+                  </div>
+                  <span className="font-medium text-slate-700 dark:text-slate-300">
+                    72%
+                  </span>
+                </div>
+
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1 h-3 w-3 rounded-full bg-blue-500" />
+                    <div>
+                      <p className="font-medium text-slate-900 dark:text-white">
+                        Scheduled
+                      </p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        4 fields
+                      </p>
+                    </div>
+                  </div>
+                  <span className="font-medium text-slate-700 dark:text-slate-300">
+                    22%
+                  </span>
+                </div>
+
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1 h-3 w-3 rounded-full bg-amber-500" />
+                    <div>
+                      <p className="font-medium text-slate-900 dark:text-white">
+                        Overdue
+                      </p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        1 field
+                      </p>
+                    </div>
+                  </div>
+                  <span className="font-medium text-slate-700 dark:text-slate-300">
+                    6%
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+                Recent Maintenance Tasks
+              </h2>
+              <button className="rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+                View All
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              {tasks.slice(0, 4).map((task, index) => (
+                <div
+                  key={task.id ?? index}
+                  className="flex items-center justify-between rounded-2xl border border-slate-100 p-4 dark:border-slate-800"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+                      <Wrench className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-slate-900 dark:text-white">
+                        {task.title}
+                      </p>
+                      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                        {task.farm_name}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <span
+                      className={`inline-flex rounded-full px-3 py-1 text-xs font-medium ${
+                        task.status === "completed"
+                          ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400"
+                          : task.status === "in_progress"
+                          ? "bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400"
+                          : "bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400"
+                      }`}
+                    >
+                      {task.status}
+                    </span>
+                    <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                      {task.due_date || "No due date"}
                     </p>
                   </div>
-                ))
-              )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+                Live Snapshot
+              </h2>
+              <button className="rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+                View All
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center justify-between rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
+                <div className="flex items-start gap-4">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+                    <Droplets className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-slate-900 dark:text-white">
+                      Total Irrigation Events
+                    </p>
+                    <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                      Recorded in the system
+                    </p>
+                  </div>
+                </div>
+                <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                  {irrigationEvents.length}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
+                <div className="flex items-start gap-4">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+                    <Wheat className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-slate-900 dark:text-white">
+                      Growing Plantings
+                    </p>
+                    <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                      Active crop cycles
+                    </p>
+                  </div>
+                </div>
+                <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                  {growingPlantings}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
+                <div className="flex items-start gap-4">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-violet-600 dark:bg-violet-500/10 dark:text-violet-400">
+                    <Cpu className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-slate-900 dark:text-white">
+                      Total Sensors
+                    </p>
+                    <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                      Devices linked to fields
+                    </p>
+                  </div>
+                </div>
+                <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                  {sensors.length}
+                </span>
+              </div>
             </div>
           </div>
         </section>

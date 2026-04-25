@@ -31,11 +31,11 @@ export default async function PlantingsPage() {
       description="Create and manage crop planting records."
     >
       <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr]">
-        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
             Add Planting
           </h2>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
             Link a crop type to a field with planting details.
           </p>
 
@@ -45,12 +45,12 @@ export default async function PlantingsPage() {
         </section>
 
         <section className="space-y-4">
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
               All Plantings
             </h2>
-            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-              Current planting records from the backend.
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+              View and manage all planting records from the backend.
             </p>
           </div>
 

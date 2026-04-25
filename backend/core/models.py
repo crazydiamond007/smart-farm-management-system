@@ -16,10 +16,7 @@ class TimeStampedModel(models.Model):
 
 
 class UserProfile(TimeStampedModel):
-    """
-    Extra profile data for Django users.
-    We still use Django's built-in User model for authentication.
-    """
+    
 
     class Role(models.TextChoices):
         ADMIN = "admin", "Admin"

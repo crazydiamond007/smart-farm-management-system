@@ -1,17 +1,52 @@
+import { LucideIcon } from "lucide-react"
+
 type StatCardProps = {
   label: string
   value: number | string
+  icon: LucideIcon
+  change?: string
+  changeColor?: "green" | "red" | "blue" | "yellow"
 }
 
-export default function StatCard({ label, value }: StatCardProps) {
+const changeColorMap = {
+  green:
+    "text-emerald-600 dark:text-emerald-400",
+  red:
+    "text-red-600 dark:text-red-400",
+  blue:
+    "text-blue-600 dark:text-blue-400",
+  yellow:
+    "text-amber-600 dark:text-amber-400",
+}
+
+export default function StatCard({
+  label,
+  value,
+  icon: Icon,
+  change,
+  changeColor = "green",
+}: StatCardProps) {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-        {label}
-      </p>
-      <h3 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">
-        {value}
-      </h3>
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md dark:border-slate-800 dark:bg-[#081223]">
+      <div className="flex items-center justify-between">
+        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+          <Icon className="h-7 w-7" />
+        </div>
+
+        <div className="text-right">
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
+            {label}
+          </p>
+          <h3 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+            {value}
+          </h3>
+          {change && (
+            <p className={`mt-2 text-sm font-medium ${changeColorMap[changeColor]}`}>
+              {change}
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
