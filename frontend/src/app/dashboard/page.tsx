@@ -13,14 +13,7 @@ import {
   MaintenanceTaskRecord,
   PaginatedMaintenanceResponse,
 } from "@/types/maintenance"
-import {
-  Cpu,
-  Droplets,
-  Map,
-  Sprout,
-  Wrench,
-  Wheat,
-} from "lucide-react"
+import { Cpu, Droplets, Map, Sprout, Wrench, Wheat } from "lucide-react"
 
 export default async function DashboardPage() {
   const [
@@ -63,8 +56,8 @@ export default async function DashboardPage() {
       title="Welcome back, Admin 👋"
       description="Here’s what’s happening on your farms today."
     >
-      <div className="space-y-8">
-        <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="space-y-6 lg:space-y-8">
+        <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
           <StatCard
             label="Total Farms"
             value={farms.length}
@@ -95,13 +88,13 @@ export default async function DashboardPage() {
           />
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+        <section className="grid gap-6 xl:grid-cols-[1.2fr_1fr]">
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-[#081223] sm:p-6">
+            <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-white sm:text-xl">
                 Sensor Overview
               </h2>
-              <div className="rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+              <div className="w-fit rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
                 7 Days
               </div>
             </div>
@@ -122,11 +115,11 @@ export default async function DashboardPage() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
-                <div className="grid grid-cols-7 items-end gap-3">
+              <div className="overflow-x-auto rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
+                <div className="grid min-w-[420px] grid-cols-7 items-end gap-3">
                   {[72, 70, 63, 76, 65, 75, 69].map((value, index) => (
                     <div key={index} className="flex flex-col items-center gap-2">
-                      <div className="flex h-40 items-end gap-1">
+                      <div className="flex h-36 items-end gap-1 sm:h-40">
                         <div
                           className="w-2 rounded-full bg-emerald-500"
                           style={{ height: `${value}%` }}
@@ -150,15 +143,15 @@ export default async function DashboardPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
-            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-[#081223] sm:p-6">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white sm:text-xl">
               Irrigation Overview
             </h2>
 
-            <div className="mt-8 flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between">
-              <div className="relative flex h-52 w-52 items-center justify-center rounded-full bg-[conic-gradient(#22c55e_0%_72%,#3b82f6_72%_94%,#f59e0b_94%_100%)]">
-                <div className="flex h-36 w-36 flex-col items-center justify-center rounded-full bg-white dark:bg-[#081223]">
-                  <span className="text-4xl font-bold text-slate-900 dark:text-white">
+            <div className="mt-8 flex flex-col items-center gap-8">
+              <div className="relative flex h-44 w-44 items-center justify-center rounded-full bg-[conic-gradient(#22c55e_0%_72%,#3b82f6_72%_94%,#f59e0b_94%_100%)] sm:h-52 sm:w-52">
+                <div className="flex h-28 w-28 flex-col items-center justify-center rounded-full bg-white dark:bg-[#081223] sm:h-36 sm:w-36">
+                  <span className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
                     72%
                   </span>
                   <span className="mt-1 text-sm text-slate-500 dark:text-slate-400">
@@ -167,8 +160,8 @@ export default async function DashboardPage() {
                 </div>
               </div>
 
-              <div className="w-full max-w-xs space-y-5">
-                <div className="flex items-start justify-between">
+              <div className="w-full space-y-5">
+                <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
                     <span className="mt-1 h-3 w-3 rounded-full bg-emerald-500" />
                     <div>
@@ -185,7 +178,7 @@ export default async function DashboardPage() {
                   </span>
                 </div>
 
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
                     <span className="mt-1 h-3 w-3 rounded-full bg-blue-500" />
                     <div>
@@ -202,7 +195,7 @@ export default async function DashboardPage() {
                   </span>
                 </div>
 
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
                     <span className="mt-1 h-3 w-3 rounded-full bg-amber-500" />
                     <div>
@@ -223,13 +216,13 @@ export default async function DashboardPage() {
           </div>
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+        <section className="grid gap-6 xl:grid-cols-2">
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-[#081223] sm:p-6">
+            <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-white sm:text-xl">
                 Recent Maintenance Tasks
               </h2>
-              <button className="rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+              <button className="w-fit rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
                 View All
               </button>
             </div>
@@ -238,13 +231,13 @@ export default async function DashboardPage() {
               {tasks.slice(0, 4).map((task, index) => (
                 <div
                   key={task.id ?? index}
-                  className="flex items-center justify-between rounded-2xl border border-slate-100 p-4 dark:border-slate-800"
+                  className="flex flex-col gap-4 rounded-2xl border border-slate-100 p-4 dark:border-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+                    <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
                       <Wrench className="h-5 w-5" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="font-medium text-slate-900 dark:text-white">
                         {task.title}
                       </p>
@@ -254,7 +247,7 @@ export default async function DashboardPage() {
                     </div>
                   </div>
 
-                  <div className="text-right">
+                  <div className="text-left sm:text-right">
                     <span
                       className={`inline-flex rounded-full px-3 py-1 text-xs font-medium ${
                         task.status === "completed"
@@ -275,23 +268,23 @@ export default async function DashboardPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-[#081223] sm:p-6">
+            <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-white sm:text-xl">
                 Live Snapshot
               </h2>
-              <button className="rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+              <button className="w-fit rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
                 View All
               </button>
             </div>
 
             <div className="space-y-4">
-              <div className="flex items-center justify-between rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
+              <div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
                 <div className="flex items-start gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+                  <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
                     <Droplets className="h-5 w-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="font-medium text-slate-900 dark:text-white">
                       Total Irrigation Events
                     </p>
@@ -305,12 +298,12 @@ export default async function DashboardPage() {
                 </span>
               </div>
 
-              <div className="flex items-center justify-between rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
+              <div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
                 <div className="flex items-start gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+                  <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
                     <Wheat className="h-5 w-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="font-medium text-slate-900 dark:text-white">
                       Growing Plantings
                     </p>
@@ -324,12 +317,12 @@ export default async function DashboardPage() {
                 </span>
               </div>
 
-              <div className="flex items-center justify-between rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
+              <div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-100 p-4 dark:border-slate-800">
                 <div className="flex items-start gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-violet-600 dark:bg-violet-500/10 dark:text-violet-400">
+                  <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-50 text-violet-600 dark:bg-violet-500/10 dark:text-violet-400">
                     <Cpu className="h-5 w-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="font-medium text-slate-900 dark:text-white">
                       Total Sensors
                     </p>

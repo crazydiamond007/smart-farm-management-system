@@ -27,7 +27,7 @@ export default function ThemeToggle() {
   if (!mounted) {
     return (
       <div className="inline-flex items-center rounded-2xl border border-slate-200 bg-white p-1 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <div className="h-10 w-40 animate-pulse rounded-xl bg-slate-100 dark:bg-slate-800" />
+        <div className="h-10 w-28 animate-pulse rounded-xl bg-slate-100 dark:bg-slate-800 sm:w-40" />
       </div>
     )
   }
@@ -43,7 +43,7 @@ export default function ThemeToggle() {
             key={option.value}
             type="button"
             onClick={() => setTheme(option.value)}
-            className={`inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition ${
+            className={`inline-flex items-center justify-center gap-2 rounded-xl px-2.5 py-2 text-sm font-medium transition sm:px-3 ${
               isActive
                 ? "bg-emerald-500 text-white shadow-sm"
                 : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
