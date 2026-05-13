@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import AppShell from "@/components/AppShell"
 import SensorForm from "@/components/SensorForm"
 import SensorsTable from "@/components/SensorsTable"
@@ -19,7 +21,7 @@ export default async function SensorsPage() {
       title="Sensor Management"
       description="Create and manage field sensors."
     >
-      <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr]">
+      <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] xl:grid-cols-[1fr_1.6fr]">
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#081223]">
           <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
             Add Sensor

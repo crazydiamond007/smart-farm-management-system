@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Farm } from "@/types/farm"
 import { FieldRecord } from "@/types/field"
 
@@ -26,6 +27,7 @@ export default function EditFieldModal({
     status: field.status,
   })
 
+  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -62,7 +64,7 @@ export default function EditFieldModal({
         throw new Error(JSON.stringify(errorData))
       }
 
-      window.location.reload()
+      router.refresh()
     } catch (error) {
       setErrorMessage(
         error instanceof Error ? error.message : "Something went wrong."

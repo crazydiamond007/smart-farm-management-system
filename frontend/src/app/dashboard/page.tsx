@@ -1,6 +1,9 @@
+import Link from "next/link"
 import AppShell from "@/components/AppShell"
 import StatCard from "@/components/StatCard"
 import { fetchFromApi } from "@/lib/api"
+
+export const dynamic = "force-dynamic"
 import { PaginatedResponse, Farm } from "@/types/farm"
 import { FieldRecord, PaginatedFieldResponse } from "@/types/field"
 import { PaginatedSensorResponse, SensorRecord } from "@/types/sensor"
@@ -53,39 +56,47 @@ export default async function DashboardPage() {
 
   return (
     <AppShell
-      title="Welcome back, Admin 👋"
+      title="Welcome back, Admin "
       description="Here’s what’s happening on your farms today."
     >
       <div className="space-y-6 lg:space-y-8">
         <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
-          <StatCard
-            label="Total Farms"
-            value={farms.length}
-            icon={Sprout}
-            change="+2 this month"
-            changeColor="green"
-          />
-          <StatCard
-            label="Total Fields"
-            value={fields.length}
-            icon={Map}
-            change="+5 this month"
-            changeColor="green"
-          />
-          <StatCard
-            label="Active Sensors"
-            value={activeSensors}
-            icon={Cpu}
-            change="+3 this month"
-            changeColor="green"
-          />
-          <StatCard
-            label="Maintenance Tasks"
-            value={pendingTasks}
-            icon={Wrench}
-            change="2 overdue"
-            changeColor="red"
-          />
+          <Link href="/farms" className="block transition-transform hover:scale-[1.02]">
+            <StatCard
+              label="Total Farms"
+              value={farms.length}
+              icon={Sprout}
+              change="+2 this month"
+              changeColor="green"
+            />
+          </Link>
+          <Link href="/fields" className="block transition-transform hover:scale-[1.02]">
+            <StatCard
+              label="Total Fields"
+              value={fields.length}
+              icon={Map}
+              change="+5 this month"
+              changeColor="green"
+            />
+          </Link>
+          <Link href="/sensors" className="block transition-transform hover:scale-[1.02]">
+            <StatCard
+              label="Active Sensors"
+              value={activeSensors}
+              icon={Cpu}
+              change="+3 this month"
+              changeColor="green"
+            />
+          </Link>
+          <Link href="/maintenance" className="block transition-transform hover:scale-[1.02]">
+            <StatCard
+              label="Maintenance Tasks"
+              value={pendingTasks}
+              icon={Wrench}
+              change="2 overdue"
+              changeColor="red"
+            />
+          </Link>
         </section>
 
         <section className="grid gap-6 xl:grid-cols-[1.2fr_1fr]">
@@ -216,15 +227,15 @@ export default async function DashboardPage() {
           </div>
         </section>
 
-        <section className="grid gap-6 xl:grid-cols-2">
+        <section className="grid gap-6 md:grid-cols-2">
           <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-[#081223] sm:p-6">
             <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <h2 className="text-lg font-semibold text-slate-900 dark:text-white sm:text-xl">
                 Recent Maintenance Tasks
               </h2>
-              <button className="w-fit rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+              <Link href="/maintenance" className="w-fit rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
                 View All
-              </button>
+              </Link>
             </div>
 
             <div className="space-y-4">
@@ -273,9 +284,9 @@ export default async function DashboardPage() {
               <h2 className="text-lg font-semibold text-slate-900 dark:text-white sm:text-xl">
                 Live Snapshot
               </h2>
-              <button className="w-fit rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+              <Link href="/sensors" className="w-fit rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
                 View All
-              </button>
+              </Link>
             </div>
 
             <div className="space-y-4">

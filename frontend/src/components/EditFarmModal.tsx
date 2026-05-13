@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Farm } from "@/types/farm"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
@@ -19,6 +20,7 @@ export default function EditFarmModal({ farm, onClose }: EditFarmModalProps) {
     is_active: farm.is_active,
   })
 
+  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -50,7 +52,7 @@ export default function EditFarmModal({ farm, onClose }: EditFarmModalProps) {
         throw new Error(JSON.stringify(errorData))
       }
 
-      window.location.reload()
+      router.refresh()
     } catch (error) {
       setErrorMessage(
         error instanceof Error ? error.message : "Something went wrong."
