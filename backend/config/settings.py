@@ -29,8 +29,11 @@ DEBUG = os.getenv(
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
+
     ".onrender.com",
     "smart-farm-management-system-pckc.onrender.com",
+
+    ".vercel.app",
 ]
 
 
@@ -216,16 +219,26 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+
+    # Render backend
+    "https://smart-farm-management-system-pckc.onrender.com",
+
+    # Vercel frontend
+    "https://smart-farm-management-system.vercel.app",
 ]
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://.*\.onrender\.com$",
+    r"^https://.*\.vercel\.app$",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+
     "https://smart-farm-management-system-pckc.onrender.com",
+
+    "https://smart-farm-management-system.vercel.app",
 ]
 
 
